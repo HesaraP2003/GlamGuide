@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlamGuide</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            background-color: #ffffff; /* Light mode background */
+            color: #333333; /* Light mode text color */
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: transparent; /* Make header background transparent */
+            border-bottom-color: transparent; /* Add this line */
+            padding: 20px 0; /* Add padding to create space */
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0;
+        }
+
+        .navbar {
+            border-bottom: none; /* Remove the border-bottom */
+            background-color: transparent !important; /* Ensure the background is transparent */
+            box-shadow: none; /* Remove any box-shadow */
+        }
+
+        .navbar-brand {
+            max-width: 150px; /* Adjust the max-width as needed */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        .navbar-nav {
+            display: flex;
+            flex-direction: row; /* Horizontal layout */
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            justify-content: space-between; /* Distributes items evenly */
+            align-items: center; /* Aligns items vertically in the center */
+        }
+
+        .nav-item {
+            margin-right: 60px; /* Adjust horizontal spacing */
+            position: relative;
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(to right, #56ab2f, #a8e063, #56ab2f);
+            transition: width 0.3s ease;
+        }
+
+        .nav-item:hover::after {
+            width: 100%;
+        }
+
+        .nav-link {
+            color: #fff; /* Change to white or any contrasting color */
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #e91e63;
+        }
+
+        .btn-get-started {
+            background-color: #e91e63;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .btn-get-started:hover {
+            background: linear-gradient(to right, #56ab2f, #a8e063, #56ab2f);
+        }
+
+        /* Hero Section Styles */
+        .hero {
+            background: url('hero.jpg') center/cover no-repeat;
+            color: #fff;
+            padding: 100px 0;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            height: 100vh; /* Full viewport height */
+        }
+
+        .hero .hero-content {
+            text-align: right;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            text-align: center; 
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            text-align: justify;
+            text-justify: inter-word;
+            max-width: 600px;
+            argin-bottom: 20px;
+        }
+
+        .text-right {
+            text-align: right; /* Aligns the text content to the right */
+        }
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+            z-index: 1; /* Overlay above background image */
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            text-align: center; /* Justify the text */
+            text-justify: inter-word; /* Specify the method of justification */
+            max-width: 600px; /* Adjust max-width as per your design */
+            margin: 20px 0; /* Add some margin for spacing */
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center; /* Centers the button horizontally */
+        }
+
+        .hero .btn {
+            background: linear-gradient(90deg, #56ab2f, #a8e063); /* Better green gradient */
+            color: #fff;
+            border-radius: 30px;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: background 0.3s ease;
+            box-shadow: 0 0 20px rgba(86, 171, 47, 0.5), 0 0 20px rgba(168, 224, 99, 0.5);
+        }
+
+        .hero .btn:hover {
+            background: linear-gradient(90deg, #a8e063, #56ab2f);
+            box-shadow: 0 0 30px rgba(168, 224, 99, 0.7), 0 0 30px rgba(86, 171, 47, 0.7);
+        }
+
+
+        /* Services Section Styles */
+            .services {
+                background-image: url('hero1.jpg'); /* Replace with your image path */
+                background-size: cover;
+                background-position: center;
+                position: relative;
+                padding: 50px 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                overflow: hidden; /* Ensure the parallax effect works */
+                height: 100vh; /* Adjust height as needed */
+            }
+
+            .services::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.6); /* Adjust opacity as needed */
+                z-index: 1;
+            }
+
+            .section-title {
+                margin-bottom: 40px;
+                text-align: center;
+                font-size: 2.5rem;
+                font-weight: bold;
+                color: #ffffff; /* Text color on dark overlay */
+                position: relative; /* Ensure text appears above overlay */
+                z-index: 2;
+            }
+
+            .services .btn {
+                background: linear-gradient(90deg, #56ab2f, #a8e063); /* Green gradient */
+                color: #fff;
+                border-radius: 30px;
+                padding: 10px 15px;
+                text-transform: uppercase;
+                font-weight: bold;
+                transition: background 0.3s ease;
+                box-shadow: 0 0 20px rgba(86, 171, 47, 0.5), 0 0 20px rgba(168, 224, 99, 0.5);
+            }
+
+.services .btn:hover {
+    background: linear-gradient(90deg, #a8e063, #56ab2f);
+    box-shadow: 0 0 30px rgba(86, 171, 47, 0.7), 0 0 30px rgba(168, 224, 99, 0.7);
+}
+
+            .bento-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+                padding: 0 20px; /* Adjusted padding for responsiveness */
+                position: relative; /* Ensure grid items appear above overlay */
+                z-index: 2;
+            }
+
+            .bento-grid .item {
+                position: relative;
+                overflow: hidden;
+                border-radius: 10px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+            }
+
+            .bento-grid .item img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
+
+            .bento-grid .item:hover img {
+                transform: scale(1.1);
+            }
+
+            .bento-grid .item .content {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                text-align: center;
+                color: #fff;
+                background: rgba(0, 0, 0, 0.5);
+                padding: 20px;
+                border-radius: 10px;
+                transition: background 0.3s ease;
+            }
+
+            .bento-grid .item:hover .content {
+                background: rgba(0, 0, 0, 0.7);
+            }
+
+            .testimonials {
+                position: relative;
+                overflow: hidden;
+                background-color: #9b7b7b;
+                padding: 250px 0;
+                z-index: 0;
+            }
+
+            .testimonial-video {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                z-index: 1;
+            }
+
+
+            .overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 0;
+            }
+
+            .container {
+                position: relative;
+                z-index: 1;
+            }
+
+            .section-title {
+                text-align: center;
+                margin-bottom: 50px;
+                color: #fff;
+            }
+
+            .bento-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+            }
+
+            .item {
+                background: none;
+                border: none;
+            }
+
+            .testimonial-content {
+                text-align: center;
+                color: #fff; /* Ensure text color is white for better visibility */
+            }
+
+            .quote {
+                font-size: 1.2rem;
+                margin-bottom: 20px;
+            }
+
+            .author {
+                font-size: 1rem;
+                font-style: italic;
+                color: #ccc;
+            }
+
+
+            .gradient-text {
+                background: linear-gradient(to right, #56ab2f, #a8e063, #56ab2f); /* Better green gradient */
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                display: inline-block;
+            }
+
+
+        /* Footer Styles */
+        footer {
+            background-color: #333333;
+            color: #ffffff;
+            padding: 30px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            background: linear-gradient(to right, #56ab2f, #a8e063, #56ab2f);
+        }
+
+        .footer-info {
+            margin-bottom: 20px;
+        }
+
+        .legal-links {
+            text-align: center;
+        }
+
+        .legal-links a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .legal-links a:hover {
+            background: linear-gradient(to right, #56ab2f, #a8e063, #56ab2f);
+        }
+
+        .logo {
+            width: 150px; /* Adjust this value as needed */
+            height: auto; /* Maintain the aspect ratio */
+            margin-left: -50px;
+            margin-top: -20px;
+        }
+        .single-line-text {
+            white-space: nowrap; /* Prevent text from wrapping */
+        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar-nav {
+                flex-direction: column;
+                align-items: flex-start; /* Adjust alignment */
+                gap: 10px;
+            }
+
+            .nav-item {
+                margin-left: 0; /* Reset margin for mobile */
+            }
+
+            .nav-item::after {
+                display: none; /* Remove underline effect on mobile */
+            }
+
+            .navbar {
+                padding: 0 10px; /* Adjusted padding for mobile */
+            }
+
+            .hero h1 {
+                font-size: 3rem; /* Adjusted font size for mobile */
+            }
+
+            .hero p {
+                font-size: 1.2rem; /* Adjusted font size for mobile */
+            }
+
+            .btn-get-started {
+                padding: 8px 16px; /* Adjusted padding for mobile */
+            }
+
+            .bento-grid {
+                padding: 0 10px; /* Adjusted padding for mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="logowa.png" alt="GlamGuide Logo" class="logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#services">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#testimonials">Testimonials</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Sign in</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+    <div class="hero-content container">
+        <div class="row justify-content-end">
+            <div class="col-lg-6 col-md-8 col-sm-10 text-right">
+                <div class="hero-text">
+                    <h1>Glam<span class="gradient-text">Guide</span></h1>
+                    <p class="hero-description">Discover GlamGuide: Your premier destination for beauty and wellness. Book appointments with top doctors, find skilled makeup artists, and explore premium skincare products—all in one place. Transform your routine with GlamGuide and elevate your beauty journey today.</p>
+                    <div class="btn-container">
+                        <a id="explore-now-btn" data-scroll-to="#services" class="btn btn-primary">Explore Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Our <span class="gradient-text">Services</span></h2>
+            <div class="bento-grid">
+                <div class="item">
+                    <img src="Doctor.jpg" alt="Book Doctors">
+                    <div class="content">
+                        <h3>Book Doctors</h3>
+                        <a href="#" class="btn btn-primary mt-2">Book Now</a>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="makeup.jpg" alt="Check Makeup Artists">
+                    <div class="content">
+                        <h3>Check Makeup Artists</h3>
+                        <a href="#" class="btn btn-primary mt-2">Check Now</a>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="skincare.jpg" alt="Skincare Products">
+                    <div class="content">
+                        <h3>Skincare Products</h3>
+                        <a href="#" class="btn btn-primary mt-2">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+        <section id="testimonials" class="testimonials">
+        <div class="video-container">
+            <video autoplay muted loop class="testimonial-video">
+                <source src="reviews.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="overlay"></div>
+        </div>
+
+        <div class="container">
+            <h2 class="section-title">Customer <span class="gradient-text">Testimonials</span></h2>
+            <div class="bento-grid">
+                <div class="item">
+                    <div class="testimonial-content">
+                        <p class="quote">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante."</p>
+                        <p class="author">- John Doe</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="testimonial-content">
+                        <p class="quote">"Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."</p>
+                        <p class="author">- Jane Smith</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="testimonial-content">
+                        <p class="quote">"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."</p>
+                        <p class="author">- Michael Brown</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Smooth scroll to anchor link
+            $('a[data-scroll-to]').on('click', function(e) {
+                e.preventDefault();
+                var target = $(this).data('scroll-to');
+                $('html, body').animate({
+                    scrollTop: $(target).offset().top
+                }, 2000); // Adjust the speed (in milliseconds) as needed
+            });
+
+            // Parallax Effect
+            $(window).scroll(function() {
+                var scrollTop = $(this).scrollTop();
+                $('.hero').css('background-position', 'center ' + (-scrollTop/4.5) + 'px'); // Adjust the divisor for slower movement
+                $('.services').css('background-position', 'center ' + (-scrollTop/3.5) + 'px'); // Adjust the divisor for slower movement
+                $('.testimonials').css('background-position', 'center ' + (-scrollTop/3) + 'px'); // Adjust the divisor for slower movement
+            });
+        });
+    </script>
+</body>
+</html>
